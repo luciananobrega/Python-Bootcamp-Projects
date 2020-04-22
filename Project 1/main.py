@@ -4,20 +4,20 @@ def show_board(board):
 
 def player1(board):
     if not winner(board):
-        show_board(board)
         p1 = int(input("Player 1, choose a position: "))
         if check_position(board, p1 - 1):
             board[p1-1] = "X"
+            show_board(board)
             player2(board)
         else:
             player1(board)
 
 def player2(board):
     if not winner(board):
-        show_board(board)
         p2 = int(input("Player 2, choose a position: "))
         if check_position(board, p2 - 1):
             board[p2-1] = "O"
+            show_board(board)
             player1(board)
         else:
             player2(board)
@@ -66,4 +66,5 @@ def winner(board):
 
 if __name__ == "__main__":
     board = list(range(1,10))
+    show_board(board)
     player1(board)
