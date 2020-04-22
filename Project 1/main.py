@@ -34,7 +34,7 @@ def check_position(board, pos):
             return 0
 
 def winner(board):
-    if board[0] == board[1] == board[2] or board[3] == board[4] == board[5] or board[6] == board[7] == board[8]:
+    if board[0] == board[1] == board[2] or board[0] == board[3] == board[6] or board[0] == board[4] == board[8]:
         if board[0] == "X":
             print("Player 1 wins!")
             return 1
@@ -43,20 +43,20 @@ def winner(board):
             return 1
         else:
             return 0
-    elif board[0] == board[3] == board[6] or board[1] == board[4] == board[7] or board[2] == board[5] == board[8]:
-        if board[0] == "X":
+    elif board[3] == board[4] == board[5] or board[1] == board[4] == board[7] or board[2] == board[4] == board[6]:
+        if board[4] == "X":
             print("Player 1 wins!")
             return 1
-        elif board[0] == "O":
+        elif board[4] == "O":
             print("Player 2 wins!")
             return 1
         else:
             return 0
-    elif board[0] == board[4] == board[8] or board[2] == board[6] == board[8]:
-        if board[0] == "X":
+    elif board[6] == board[7] == board[8] or board[2] == board[5] == board[8]:
+        if board[8] == "X":
             print("Player 1 wins!")
             return 1
-        elif board[0] == "O":
+        elif board[8] == "O":
             print("Player 2 wins!")
             return 1
         else:
