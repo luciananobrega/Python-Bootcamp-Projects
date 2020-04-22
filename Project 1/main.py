@@ -29,8 +29,10 @@ def winner(board):
     elif board[0] == board[3] == board[6] or board[1] == board[4] == board[7] or board[2] == board[5] == board[8]:
         if board[0] == "X":
             print("Player 1 wins!")
+            return 1
         elif board[0] == "O":
             print("Player 2 wins!")
+            return 1
         else:
             return 0
     elif board[0] == board[4] == board[8] or board[2] == board[6] == board[8]:
