@@ -6,15 +6,32 @@ def player1(board):
     if not winner(board):
         show_board(board)
         p1 = int(input("Player 1, choose a position: "))
-        board[p1-1] = "X"
-        player2(board)
+        if check_position(board, p1 - 1):
+            board[p1-1] = "X"
+            player2(board)
+        else:
+            player1(board)
 
 def player2(board):
     if not winner(board):
         show_board(board)
         p2 = int(input("Player 2, choose a position: "))
-        board[p2-1] = "O"
-        player1(board)
+        if check_position(board, p2 - 1):
+            board[p2-1] = "O"
+            player1(board)
+        else:
+            player2(board)
+
+def check_position(board, pos):
+    if pos not in range(0,9):
+        print("Invalid position. Try again.")
+        return 0
+    else:
+        if board[pos] != "X" and board[pos] != "O":  
+            return 1
+        else:
+            print("Position already chosen. Play again")
+            return 0
 
 def winner(board):
     if board[0] == board[1] == board[2] or board[3] == board[4] == board[5] or board[6] == board[7] == board[8]:
