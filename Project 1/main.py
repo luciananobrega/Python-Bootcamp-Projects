@@ -1,70 +1,74 @@
-def show_board(board):
-    print("_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_".
-        format(board[6], board[7], board[8], board[3], board[4], board[5], board[0], board[1], board[2]))
+class TicTacToe():
+    def __init__(self):
+        self.board = list(range(1,10))
+        self.show_board()
+        self.player1()
 
-def player1(board):
-    if not winner(board):
-        p1 = int(input("Player 1, choose a position: "))
-        if check_position(board, p1 - 1):
-            board[p1-1] = "X"
-            show_board(board)
-            player2(board)
-        else:
-            player1(board)
+    def show_board(self):
+        print("_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_".
+            format(self.board[6], self.board[7], self.board[8], self.board[3], self.board[4], self.board[5], self.board[0], self.board[1], self.board[2]))
 
-def player2(board):
-    if not winner(board):
-        p2 = int(input("Player 2, choose a position: "))
-        if check_position(board, p2 - 1):
-            board[p2-1] = "O"
-            show_board(board)
-            player1(board)
-        else:
-            player2(board)
+    def player1(self):
+        if not self.winner():
+            p1 = int(input("Player 1, choose a position: "))
+            if self.check_position(p1 - 1):
+                self.board[p1-1] = "X"
+                self.show_board()
+                self.player2()
+            else:
+                self.player1()
 
-def check_position(board, pos):
-    if pos not in range(0,9):
-        print("Invalid position. Try again.")
-        return 0
-    else:
-        if board[pos] != "X" and board[pos] != "O":  
-            return 1
-        else:
-            print("Position already chosen. Play again")
-            return 0
+    def player2(self):
+        if not self.winner():
+            p2 = int(input("Player 2, choose a position: "))
+            if self.check_position(p2 - 1):
+                self.board[p2-1] = "O"
+                self.show_board()
+                self.player1()
+            else:
+                self.player2()
 
-def winner(board):
-    if board[0] == board[1] == board[2] or board[0] == board[3] == board[6] or board[0] == board[4] == board[8]:
-        if board[0] == "X":
-            print("Player 1 wins!")
-            return 1
-        elif board[0] == "O":
-            print("Player 2 wins!")
-            return 1
+    def check_position(self, pos):
+        if pos not in range(0,9):
+            print("Invalid position. Try again.")
+            return 0
+        else:
+            if self.board[pos] != "X" and self.board[pos] != "O":  
+                return 1
+            else:
+                print("Position already chosen. Play again")
+                return 0
+
+    def winner(self):
+        if self.board[0] == self.board[1] == self.board[2] or self.board[0] == self.board[3] == self.board[6] or self.board[0] == self.board[4] == self.board[8]:
+            if self.board[0] == "X":
+                print("Player 1 wins!")
+                return 1
+            elif self.board[0] == "O":
+                print("Player 2 wins!")
+                return 1
+            else:
+                return 0
+        elif self.board[3] == self.board[4] == self.board[5] or self.board[1] == self.board[4] == self.board[7] or self.board[2] == self.board[4] == self.board[6]:
+            if self.board[4] == "X":
+                print("Player 1 wins!")
+                return 1
+            elif self.board[4] == "O":
+                print("Player 2 wins!")
+                return 1
+            else:
+                return 0
+        elif self.board[6] == self.board[7] == self.board[8] or self.board[2] == self.board[5] == self.board[8]:
+            if self.board[8] == "X":
+                print("Player 1 wins!")
+                return 1
+            elif self.board[8] == "O":
+                print("Player 2 wins!")
+                return 1
+            else:
+                return 0
         else:
             return 0
-    elif board[3] == board[4] == board[5] or board[1] == board[4] == board[7] or board[2] == board[4] == board[6]:
-        if board[4] == "X":
-            print("Player 1 wins!")
-            return 1
-        elif board[4] == "O":
-            print("Player 2 wins!")
-            return 1
-        else:
-            return 0
-    elif board[6] == board[7] == board[8] or board[2] == board[5] == board[8]:
-        if board[8] == "X":
-            print("Player 1 wins!")
-            return 1
-        elif board[8] == "O":
-            print("Player 2 wins!")
-            return 1
-        else:
-            return 0
-    else:
-        return 0
 
 if __name__ == "__main__":
-    board = list(range(1,10))
-    show_board(board)
-    player1(board)
+    game = TicTacToe()
