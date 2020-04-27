@@ -2,6 +2,7 @@ class TicTacToe():
     def __init__(self):
         self.board = list(range(1,10))
         self.show_board()
+        self.count = 0
         self.player1()
 
     def show_board(self):
@@ -48,6 +49,7 @@ class TicTacToe():
                 print("Player 2 wins!")
                 return 1
             else:
+                self.count += 1
                 return 0
         elif self.board[3] == self.board[4] == self.board[5] or self.board[1] == self.board[4] == self.board[7] or self.board[2] == self.board[4] == self.board[6]:
             if self.board[4] == "X":
@@ -57,6 +59,7 @@ class TicTacToe():
                 print("Player 2 wins!")
                 return 1
             else:
+                self.count += 1
                 return 0
         elif self.board[6] == self.board[7] == self.board[8] or self.board[2] == self.board[5] == self.board[8]:
             if self.board[8] == "X":
@@ -66,9 +69,15 @@ class TicTacToe():
                 print("Player 2 wins!")
                 return 1
             else:
+                self.count += 1
                 return 0
         else:
-            return 0
+            if self.count == 9:
+                print("Drawn")
+                return 1
+            else:
+                self.count += 1
+                return 0
 
 if __name__ == "__main__":
     game = TicTacToe()
