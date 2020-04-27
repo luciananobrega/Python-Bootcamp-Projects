@@ -11,7 +11,11 @@ class TicTacToe():
 
     def player1(self):
         if not self.winner():
-            p1 = int(input("Player 1, choose a position: "))
+            try:
+                p1 = int(input("Player 1, choose a position: "))
+            except:
+                print("Invalid position. Try again.")
+                self.player1()
             if self.check_position(p1 - 1):
                 self.board[p1-1] = "X"
                 self.show_board()
@@ -21,7 +25,12 @@ class TicTacToe():
 
     def player2(self):
         if not self.winner():
-            p2 = int(input("Player 2, choose a position: "))
+            try:
+                p2 = int(input("Player 2, choose a position: "))
+            except:
+                print("Invalid position. Try again.")
+                self.player2()
+                
             if self.check_position(p2 - 1):
                 self.board[p2-1] = "O"
                 self.show_board()
@@ -30,15 +39,11 @@ class TicTacToe():
                 self.player2()
 
     def check_position(self, pos):
-        if pos not in range(0,9):
-            print("Invalid position. Try again.")
-            return 0
+        if self.board[pos] != "X" and self.board[pos] != "O":  
+            return 1
         else:
-            if self.board[pos] != "X" and self.board[pos] != "O":  
-                return 1
-            else:
-                print("Position already chosen. Play again")
-                return 0
+            print("Position already chosen. Play again")
+            return 0
 
     def winner(self):
         if self.board[0] == self.board[1] == self.board[2] or self.board[0] == self.board[3] == self.board[6] or self.board[0] == self.board[4] == self.board[8]:
