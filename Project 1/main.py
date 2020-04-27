@@ -15,6 +15,7 @@ class TicTacToe():
                 p1 = int(input("Player 1, choose a position: "))
             except:
                 print("Invalid position. Try again.")
+                self.count -= 1
                 self.player1()
             if self.check_position(p1 - 1):
                 self.board[p1-1] = "X"
@@ -29,8 +30,8 @@ class TicTacToe():
                 p2 = int(input("Player 2, choose a position: "))
             except:
                 print("Invalid position. Try again.")
+                self.count -= 1
                 self.player2()
-                
             if self.check_position(p2 - 1):
                 self.board[p2-1] = "O"
                 self.show_board()
@@ -42,7 +43,8 @@ class TicTacToe():
         if self.board[pos] != "X" and self.board[pos] != "O":  
             return 1
         else:
-            print("Position already chosen. Play again")
+            print("Position already chosen. Try again")
+            self.count -= 1
             return 0
 
     def winner(self):
