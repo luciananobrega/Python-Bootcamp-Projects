@@ -16,6 +16,7 @@ class TicTacToe():
             except:
                 print("Invalid position. Try again.")
                 self.count -= 1
+                p1 = 0
                 self.player1()
             if self.check_position(p1 - 1):
                 self.board[p1-1] = "X"
@@ -31,6 +32,7 @@ class TicTacToe():
             except:
                 print("Invalid position. Try again.")
                 self.count -= 1
+                p2 = 0
                 self.player2()
             if self.check_position(p2 - 1):
                 self.board[p2-1] = "O"
