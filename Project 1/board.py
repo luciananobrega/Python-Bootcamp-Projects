@@ -28,12 +28,9 @@ class Board():
     def check_full(self):
         pass
 
-
-class Position():
-    def check_position(self, pos):
-        if self.board[pos] != "X" and self.board[pos] != "O":
-            return 1
+    def valid_position(self, pos):
+        if self.board[pos-1] != "X" and self.board[pos-1] != "O":
+            return True
         else:
             print("Position already chosen. Try again")
-            self.count -= 1
-            return 0
+            return False
