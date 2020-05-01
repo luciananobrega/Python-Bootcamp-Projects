@@ -16,10 +16,10 @@ class Board():
         self.board[position - 1] = marker
 
     def check_winner(self, player):
-        if board[0] == board[1] == board[2] or board[3] == board[4] == board[5] or \
-            board[6] == board[7] == board[8] or board[0] == board[3] == board[6] or \
-            board[1] == board[4] == board[7] or board[2] == board[5] == board[8] or \
-            board[0] == board[4] == board[8] or board[2] == board[4] == board[6]:
+        if self.board[0] == self.board[1] == self.board[2] or self.board[3] == self.board[4] == self.board[5] or \
+            self.board[6] == self.board[7] == self.board[8] or self.board[0] == self.board[3] == self.board[6] or \
+            self.board[1] == self.board[4] == self.board[7] or self.board[2] == self.board[5] == self.board[8] or \
+            self.board[0] == self.board[4] == self.board[8] or self.board[2] == self.board[4] == self.board[6]:
             print("Player {} wins!".format(player))
             return True
         else:
