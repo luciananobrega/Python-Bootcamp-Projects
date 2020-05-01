@@ -12,8 +12,8 @@ class Board():
         print("_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_".
             format(self.board[6], self.board[7], self.board[8], self.board[3], self.board[4], self.board[5], self.board[0], self.board[1], self.board[2]))
     
-    def update_board(self):
-        pass
+    def update_board(self, position, marker):
+        self.board[position - 1] = marker
 
     def check_winner(self, player):
         if board[0] == board[1] == board[2] or board[3] == board[4] == board[5] or \
