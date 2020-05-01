@@ -1,5 +1,11 @@
 class Player:
-    pass
+    def __init__(self, marker):
+        self.marker = marker
+    
+    def play(self):
+        return int(input("Player {}, choose a position: ".format(self.marker)))
+
+
     """
     def player1(self):
         if not Board.check_result(self, board):
