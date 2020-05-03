@@ -26,7 +26,7 @@ class Board():
             return False
 
     def check_full(self):
-        pass
+        return all(isinstance(x, str) for x in self.board)
 
     def valid_position(self, pos):
         if self.board[pos-1] != "X" and self.board[pos-1] != "O":
