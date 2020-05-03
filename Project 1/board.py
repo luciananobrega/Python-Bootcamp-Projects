@@ -5,9 +5,7 @@ class Board():
         self.board = list(range(1,10))
 
     def __str__(self):
-        def clear():
-            os.system( 'cls' )
-        clear()
+        os.system('cls')
         
         return "_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_\n_{}_|_{}_|_{}_".format(self.board[6], self.board[7], self.board[8], self.board[3], self.board[4], self.board[5], self.board[0], self.board[1], self.board[2])
     
@@ -31,5 +29,5 @@ class Board():
         if self.board[pos-1] != "X" and self.board[pos-1] != "O":
             return True
         else:
-            print("Position already chosen. Try again")
+            print("Position already chosen. Try again.")
             return False

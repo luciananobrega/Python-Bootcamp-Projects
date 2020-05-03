@@ -3,8 +3,12 @@ class Player:
         self.marker = marker
     
     def play(self):
+        pos = input("Player {}, choose a position or press 'q' to quit: ".format(self.marker))
+        if pos.lower() == 'q':
+            print('Exiting game')
+            return pos.lower()
         try:
-            return int(input("Player {}, choose a position: ".format(self.marker)))
+            return int(pos)
         except:
-            print("Invalid position. Try again.")
+            print("Invalid position. Try again or press 'q' to quit: ")
             return 0

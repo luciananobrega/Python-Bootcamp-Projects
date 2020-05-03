@@ -8,6 +8,8 @@ p2 = Player("O")
 
 def player1():
     pos = p1.play()
+    if pos == 'q':
+        return 0
     if pos and board.valid_position(pos):
         board.update_board(pos, p1.marker)
         print(board)
@@ -21,6 +23,8 @@ def player1():
 
 def player2():
     pos = p2.play()
+    if pos == 'q':
+        return 0
     if pos and board.valid_position(pos):
         board.update_board(pos, p2.marker)
         print(board)
