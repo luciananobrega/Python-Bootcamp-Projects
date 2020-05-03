@@ -12,7 +12,10 @@ def player1():
         board.update_board(pos, p1.marker)
         board.show_board()
         if not board.check_winner(p1.marker):
-            player2()
+            if board.check_full():
+                print("Drawn")
+            else:
+                player2()
     else:
         player1()
 
@@ -22,7 +25,10 @@ def player2():
         board.update_board(pos, p2.marker)
         board.show_board()
         if not board.check_winner(p2.marker):
-            player1()
+            if board.check_full():
+                print("Drawn")
+            else:
+                player1()
     else:
         player2()
 
