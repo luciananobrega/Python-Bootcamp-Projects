@@ -1,5 +1,5 @@
-from board import Board
-from player import Player
+from common.board import Board
+from common.player import Player
 
 board = Board()
 print(board)
@@ -35,6 +35,3 @@ def player2():
                 player1()
     else:
         player2()
-
-if __name__ == "__main__":
-    player1()
