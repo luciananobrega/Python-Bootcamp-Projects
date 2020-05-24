@@ -1,15 +1,20 @@
 from cards import Deck, Hand
 
-
 class BlackJack:
 
     def start(self):
+        """
+        Start game by instanciate the important classes
+        """
         self.deck = Deck()
         self.player = Hand()
         self.dealer = Hand()
         self.session()
 
     def check21(self, endgame = False):
+        """
+        Check if we have a winner
+        """
         if not endgame:
             if self.player.sum == 21:
                 print("Player Blackjack!")
@@ -30,6 +35,9 @@ class BlackJack:
             self.next_action()
 
     def session(self, endgame = False):
+        """
+        Player and dealer take a card
+        """
         if not endgame:
             card = self.deck.get_card()
             print("Player new card: {}".format(card))
@@ -43,6 +51,9 @@ class BlackJack:
         self.check21()
     
     def partial_results(self):
+        """
+        Print partial results (cards on hands and sum)
+        """
         print("*** Player ***")
         print(self.player)
         print("*** Dealer ***")
@@ -50,6 +61,9 @@ class BlackJack:
 
 
     def next_action(self):
+        """
+        Player can choose the next action: hit or stand
+        """
         action = input("Next action: Hit (H)/Stand (S) ")
 
         if action.lower() == "h":
@@ -61,6 +75,9 @@ class BlackJack:
             self.next_action()
 
     def check_play_again(self):
+        """
+        Asks player if wants to play again
+        """
         opt = input("You want to play it again? Y/N ")
         if opt.lower() == 'y':
             self.start()

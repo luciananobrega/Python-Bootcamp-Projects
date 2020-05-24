@@ -18,7 +18,7 @@ class Deck(Cards):
 
     def get_card(self):
         """
-        Chooses randomly a card and remove it from the deck
+        Randomly chooses a card and remove it from the deck
         """
         random_card_index = random.randint(0, len(self.all_cards) - 1)
         card = self.all_cards.pop(random_card_index)
@@ -38,8 +38,14 @@ class Hand(Cards):
         return p + p_sum
 
     def result(self):
+        """
+        Calculates the value on hand
+        """
         for el in self.hand:
             self.sum += self.values[el]
 
     def add_card(self, card):
+        """
+        Includes card to hand
+        """
         self.hand.append(card)
