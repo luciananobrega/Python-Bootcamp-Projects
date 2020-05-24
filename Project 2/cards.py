@@ -5,7 +5,9 @@ class Cards:
         self.all_cards = ['A']
         for i in range(1,11):
             self.all_cards.append(str(i))
-        self.all_cards.append('J', 'Q', 'K')
+        self.all_cards.append('J')
+        self.all_cards.append('Q')
+        self.all_cards.append('K')
 
     def values(self):
         self.values = { 'A': 10, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
@@ -21,30 +23,25 @@ class Deck(Cards):
         Chooses randomly a card and remove it from the deck
         """
         random_card_index = random.randint(0, len(self.all_cards))
-        return self.all_cards.pop[random_card_index]
+        card = self.all_cards.pop(random_card_index)
+        return card
 
 class Hand(Cards):
     def __init__(self):
         Cards.__init__(self)
-        self.hand_player = []
-        self.hand_dealer = []
+        self.hand = []
+        self.sum = 0
     
     def __str__(self):
-        p     = "Player cards: " + self.hand_player
-        p_sum = "    Sum:" + str(sum(self.hand_player))
-        d     = "Dealer cards: " + self.hand_dealer
-        d_sum = "    Sum:" + str(sum(self.dealer_player))
+        p     = "Cards: " + self.hand
+        self.sum()
+        p_sum = "  Sum: " + str(self.sum)
 
-        return p + p_sum + d + d_sum
+        return p + p_sum
 
-    def sum(self, hand):
-        res = 0
-        for el in hand:
-            res += self.values[el]
-        return res
+    def sum(self):
+        for el in self.hand:
+            self.sum += self.values[el]
 
-    def add_card(self, card, pl):
-        if pl == 'player':
-            self.hand_player.append(card)
-        elif pl == 'dealer':
-            self.hand_dealer.append(card)
+    def add_card(self, card):
+        self.hand.append(card)

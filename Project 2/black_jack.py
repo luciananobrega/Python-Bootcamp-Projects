@@ -1,9 +1,75 @@
 from cards import Deck, Hand
 
-if __name__ == '__main__':
-    deck = Deck()
-    player = Hand()
+
+class BlackJack:
+    def __str__(self):
+        pl = "*** Player ***\n" + self.player.print() + "\n"
+        dl = "*** Dealer ***\n" + self.dealer.print()
+        return pl + dl
+
+    def start(self):
+        self.deck = Deck()
+        self.player = Hand()
+        self.dealer = Hand()
+        self.session()
+
+    def check21(self):
+        if self.player.sum == 21:
+            print("Player Blackjack!")
+            self.session(endgame = True)
+        elif self.player.sum > 21:
+            print("Player Bust")
+            print("You lose")
+            self.check_play_again()
+        if self.dealer.sum == 21:
+            print("Dealer Blackjack")
+            print("You lose")
+            self.check_play_again()
+        elif self.dealer.sum > 21:
+            print("Dealer Bust!")
+            print("You win!")
+            self.check_play_again()
+        if player < 21 and dealer < 21:
+            self.next_action()
+
+    def check_play_again(self):
+        opt = input("You want to play it again? Y/N")
+        if opt.lower == 'y':
+            self.start()
+        elif opt.lower == 'n':
+            return 0
+        else:
+            print("Option not recognized. Try again.")
+            self.check_play_again()
+
+    def session(self, endgame = False):
+        if not endgame:
+            card = self.deck.get_card()
+            print("Player new card: {}".format(card))
+            self.player.add_card(card)
+        
+        card = self.deck.get_card()
+        self.dealer.add_card(card)
+        print("Dealer new card: {}".format(card))
+
+        self.print()
+        self.check21()
     
+    def next_action(self):
+        action = input("Next action: Hit (H)/Stand (S)")
+
+        if action.lower() == "h":
+            self.session()
+        elif action.lower() == "s":
+            self.stand()
+        else:
+            print("Option not recognized. Try again.")
+            self.next_action()
+
+
+if __name__ == '__main__':
+    bj = BlackJack()
+    bj.start()
 
 
 # player gets card
@@ -31,8 +97,6 @@ if __name__ == '__main__':
 
 # DECK
 ## send card
-
-
 
 # HAND
 ## sum
