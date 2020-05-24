@@ -26,7 +26,7 @@ class BlackJack:
             print("Dealer Bust!")
             print("You win!")
             self.check_play_again()
-        if player < 21 and dealer < 21:
+        if self.player.sum < 21 and self.dealer.sum < 21:
             self.next_action()
 
     def session(self, endgame = False):
@@ -43,28 +43,28 @@ class BlackJack:
         self.check21()
     
     def partial_results(self):
-        print("*** Player ***\n")
+        print("*** Player ***")
         print(self.player)
-        print("\n*** Dealer ***\n")
+        print("*** Dealer ***")
         print(self.dealer)
 
 
     def next_action(self):
-        action = input("Next action: Hit (H)/Stand (S)")
+        action = input("Next action: Hit (H)/Stand (S) ")
 
         if action.lower() == "h":
             self.session()
         elif action.lower() == "s":
-            self.stand()
+            self.session(endgame = True)
         else:
             print("Option not recognized. Try again.")
             self.next_action()
 
     def check_play_again(self):
-        opt = input("You want to play it again? Y/N")
-        if opt.lower == 'y':
+        opt = input("You want to play it again? Y/N ")
+        if opt.lower() == 'y':
             self.start()
-        elif opt.lower == 'n':
+        elif opt.lower() == 'n':
             return 0
         else:
             print("Option not recognized. Try again.")
