@@ -54,15 +54,16 @@ class BlackJack:
             self.play()
         if self.player.sum == 21:
             print("Player Blackjack!")
-            self.dealer_play()
+            self.check21_dealer()
         elif self.player.sum > 21:
             print("Player Bust")
             print("You lose")
             self.player_action.check_play_again()
 
     def check21_dealer(self):
-        if self.dealer.sum < self.player.sum():
+        if self.dealer.sum < self.player.sum:
             self.dealer_gets_card()
+            self.partial_results()
             self.check21_dealer()
         elif self.dealer.sum == 21:
             print("Dealer Blackjack!")
@@ -84,12 +85,14 @@ class BlackJack:
         action = self.player_action.next_action()
         if action == 'h':
             self.player_gets_card()
-            self.partial_results()
+            self.partial_results(show_first_card=False)
             self.check21_player()
         if action == 's':
+            self.partial_results()
+            self.check21_dealer()
             self.dealer_gets_card()
             self.partial_results()
-
+            self.check21_dealer()
 
     def partial_results(self, show_first_card = True):
         """
