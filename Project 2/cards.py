@@ -8,7 +8,7 @@ class Cards:
         self.all_cards.append('J')
         self.all_cards.append('Q')
         self.all_cards.append('K')
-        self.values = { 'A': 10, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
+        self.values = { 'A': 11, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
                         '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10 
                      }
 
@@ -29,18 +29,25 @@ class Hand(Cards):
         Cards.__init__(self)
         self.hand = []
         self.sum = 0
-    
-    def __str__(self):
-        p     = "Cards: " + ', '.join(self.hand)
-        self.result()
-        p_sum = "  Sum: " + str(self.sum)
 
-        return p + p_sum
+
+    def prt(self, show_first_card = True):
+        if show_first_card == True:
+            p     = "Cards: " + ', '.join(self.hand)
+            self.result()
+            p_sum = "  Sum: " + str(self.sum)
+            print(p + p_sum)
+        else:
+            first_hand = self.hand[:]
+            first_hand[0] = '_'
+            print("Cards: " + ', '.join(first_hand))
+            
 
     def result(self):
         """
         Calculates the value on hand
         """
+        self.sum = 0
         for el in self.hand:
             self.sum += self.values[el]
 

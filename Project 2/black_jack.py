@@ -1,64 +1,104 @@
 from cards import Deck, Hand
+from player import Player
 
 class BlackJack:
 
-    def start(self):
+    def __init__(self):
         """
         Start game by instanciate the important classes
         """
         self.deck = Deck()
+        self.player_action = Player()
         self.player = Hand()
         self.dealer = Hand()
-        self.session()
-        self.session()
+        self.start()
 
-        self.partial_results()
-        self.check21()
-
-    def check21(self, stand = False):
+    def start(self):
         """
-        Check if we have a winner
+        Beginning of the game.
+        Player starts with two cards.
+        Dealer starts with two cards, but one is faced down
         """
-        if not stand:
-            if self.player.sum < 21 and self.dealer.sum < 21:
-                self.next_action()
-            if self.player.sum == 21:
-                print("Player Blackjack!")
-                self.session(stand = True)
-            elif self.player.sum > 21:
-                print("Player Bust")
-                print("You lose")
-                self.check_play_again()
-        if self.dealer.sum == 21:
-            print("Dealer Blackjack")
-            print("You lose")
-            self.check_play_again()
-        elif self.dealer.sum > 21:
-            print("Dealer Bust!")
-            print("You win!")
-            self.check_play_again()
+        self.player_gets_card()
+        self.dealer_gets_card(first_round=True)
+        self.player_gets_card()
+        self.dealer_gets_card()
 
+        self.partial_results(show_first_card = False)
+        self.check21_player()
 
-    def session(self, stand = False):
+    def player_gets_card(self):
         """
-        Player and dealer take a card twice
+        Player gets a new card from the deck
         """
         card = self.deck.get_card()
         print("Player new card: {}".format(card))
         self.player.add_card(card)
-
+    
+    def dealer_gets_card(self, first_round = False):
+        """
+        Dealer gets a new card from the deck
+        """
         card = self.deck.get_card()
         self.dealer.add_card(card)
-        print("Dealer new card: {}".format(card))
+        if first_round == True:
+            print("Dealer new card: X")
+        else:
+            print("Dealer new card: {}".format(card))
 
-    def partial_results(self):
+    def check21_player(self):
+        """
+        Check value of sum
+        """
+        if self.player.sum < 21:
+            self.play()
+        if self.player.sum == 21:
+            print("Player Blackjack!")
+            self.dealer_play()
+        elif self.player.sum > 21:
+            print("Player Bust")
+            print("You lose")
+            self.player_action.check_play_again()
+
+    def check21_dealer(self):
+        if self.dealer.sum < self.player.sum():
+            self.dealer_gets_card()
+            self.check21_dealer()
+        elif self.dealer.sum == 21:
+            print("Dealer Blackjack!")
+            if self.player.sum == 21:
+                print("Push")
+            else:
+                print("You lose")
+        elif self.dealer.sum > self.player.sum:
+            print("You win!")
+        else:
+            print("Push")
+        
+        self.player_action.check_play_again()
+
+    def play(self):
+        """
+        Checks new action from player: hit or stand
+        """
+        action = self.player_action.next_action()
+        if action == 'h':
+            self.player_gets_card()
+            self.partial_results()
+            self.check21_player()
+        if action == 's':
+            self.dealer_gets_card()
+            self.partial_results()
+
+
+    def partial_results(self, show_first_card = True):
         """
         Print partial results (cards on hands and sum)
         """
         print("*** Player ***")
-        print(self.player)
+        self.player.prt()
         print("*** Dealer ***")
-        print(self.dealer)
+        self.dealer.prt(show_first_card)
 
 
 if __name__ == '__main__':
