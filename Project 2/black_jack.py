@@ -10,15 +10,21 @@ class BlackJack:
         self.player = Hand()
         self.dealer = Hand()
         self.session()
+        self.session()
 
-    def check21(self, endgame = False):
+        self.partial_results()
+        self.check21()
+
+    def check21(self, stand = False):
         """
         Check if we have a winner
         """
-        if not endgame:
+        if not stand:
+            if self.player.sum < 21 and self.dealer.sum < 21:
+                self.next_action()
             if self.player.sum == 21:
                 print("Player Blackjack!")
-                self.session(endgame = True)
+                self.session(stand = True)
             elif self.player.sum > 21:
                 print("Player Bust")
                 print("You lose")
@@ -31,25 +37,20 @@ class BlackJack:
             print("Dealer Bust!")
             print("You win!")
             self.check_play_again()
-        if self.player.sum < 21 and self.dealer.sum < 21:
-            self.next_action()
 
-    def session(self, endgame = False):
+
+    def session(self, stand = False):
         """
-        Player and dealer take a card
+        Player and dealer take a card twice
         """
-        if not endgame:
-            card = self.deck.get_card()
-            print("Player new card: {}".format(card))
-            self.player.add_card(card)
-        
+        card = self.deck.get_card()
+        print("Player new card: {}".format(card))
+        self.player.add_card(card)
+
         card = self.deck.get_card()
         self.dealer.add_card(card)
         print("Dealer new card: {}".format(card))
 
-        self.partial_results()
-        self.check21()
-    
     def partial_results(self):
         """
         Print partial results (cards on hands and sum)
@@ -59,33 +60,6 @@ class BlackJack:
         print("*** Dealer ***")
         print(self.dealer)
 
-
-    def next_action(self):
-        """
-        Player can choose the next action: hit or stand
-        """
-        action = input("Next action: Hit (H)/Stand (S) ")
-
-        if action.lower() == "h":
-            self.session()
-        elif action.lower() == "s":
-            self.session(endgame = True)
-        else:
-            print("Option not recognized. Try again.")
-            self.next_action()
-
-    def check_play_again(self):
-        """
-        Asks player if wants to play again
-        """
-        opt = input("You want to play it again? Y/N ")
-        if opt.lower() == 'y':
-            self.start()
-        elif opt.lower() == 'n':
-            return 0
-        else:
-            print("Option not recognized. Try again.")
-            self.check_play_again()
 
 if __name__ == '__main__':
     bj = BlackJack()
