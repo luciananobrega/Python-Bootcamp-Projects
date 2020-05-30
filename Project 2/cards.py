@@ -30,7 +30,6 @@ class Hand(Cards):
         self.hand = []
         self.sum = 0
 
-
     def prt(self, show_first_card = True):
         if show_first_card == True:
             p     = "Cards: " + ', '.join(self.hand)
@@ -42,7 +41,6 @@ class Hand(Cards):
             first_hand[0] = '_'
             print("Cards: " + ', '.join(first_hand))
             
-
     def result(self):
         """
         Calculates the value on hand
