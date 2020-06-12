@@ -16,8 +16,10 @@ class Player:
         Asks player if wants to play again
         """
         opt = input("You want to play it again? Y/N ")
-        if opt.lower() == 'y' or opt.lower() == 'n':
-            return opt.lower()
+        if opt.lower() == 'y':
+            return True
+        elif opt.lower() == 'n':
+            return False
         else:
             print("Option not recognized. Try again.")
             self.check_play_again()

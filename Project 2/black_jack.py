@@ -2,17 +2,20 @@ from cards import Deck, Hand
 from player import Player
 from chips import Chips
 
+import os
+
 class BlackJack:
 
     def __init__(self):
         """
-        Start game by instanciate the important classes
+        Start game by instanciating the important classes
         """
         self.deck = Deck()
         self.player_action = Player()
         self.player = Hand()
         self.dealer = Hand()
         self.chips = Chips()
+
         self.start()
 
     def start(self):
@@ -26,7 +29,7 @@ class BlackJack:
         self.player_gets_card()
         self.dealer_gets_card()
 
-        self.partial_results(show_first_card = False)
+        self.partial_results(show_first_card=False)
         self.check21_player()
 
     def player_gets_card(self):
@@ -86,7 +89,12 @@ class BlackJack:
                 self.chips.win_bet()
                 
         print(self.chips)
-        self.player_action.check_play_again()
+        play_again = self.player_action.check_play_again()
+
+        if play_again:
+            self.main()
+        else:
+            os.sys.exit()
 
     def play(self):
         """
@@ -117,7 +125,11 @@ class BlackJack:
         else: 
             p_dealer = p_dealer.split(':')[1].split(',')[1]
             print('Cards: X, ' + p_dealer + ': X')
-            
+
+    def main(self):
+        bj = BlackJack()
+        bj.start()
+
 if __name__ == '__main__':
     bj = BlackJack()
-    bj.start()
+    bj.main()
