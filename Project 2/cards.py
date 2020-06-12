@@ -26,6 +26,7 @@ class Deck():
         for rank in ranks:
             for suit in suits:
                 self.deck.append(Cards(rank, suit))
+
     def get_card(self):
         """
         Randomly chooses a card and remove it from the deck
@@ -39,11 +40,12 @@ class Hand():
     def __init__(self):
         self.hand = []
         self.sum = 0
+        self.aces = 0
 
     def __str__(self, show_first_card = True):
         if show_first_card == True:
             p     = "Cards: " + ', '.join(i.__str__() for i in self.hand)
-            p_sum = "  Sum: " + str(self.result())
+            p_sum = "  Sum: " + str(self.sum)
             return p + p_sum
         else:
             first_hand = self.hand[1:]
@@ -56,19 +58,45 @@ class Hand():
         self.sum = 0
         for card in self.hand:
             self.sum += values[card.ranks]
+        
+        if self.sum > 21:
+            self.adjust_for_ace()
+
         return self.sum
+        
+
+    def adjust_for_ace(self):
+        """
+        if the player busts and still has an Ace card,
+        change the value of ace from 11 to 1.
+        """
+        if self.aces:
+            self.aces -= 1
+            self.sum -= 10
 
     def add_card(self, card):
         """
         Includes card to hand
         """
         self.hand.append(card)
-
+        if card.ranks == 'A':
+            self.aces += 1
 
 if __name__ == '__main__':
     deck = Deck()
     player = Hand()
+
     c = Cards('7', 'Hearts')
     player.add_card(c)
     player.result()
-    print(player.sum)
+    print(player)
+    
+    c = Cards('10', 'Diamonds')
+    player.add_card(c)
+    player.result()
+    print(player)
+
+    c = Cards('A', 'Spades')
+    player.add_card(c)
+    player.result()
+    print(player)
