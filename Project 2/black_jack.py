@@ -4,6 +4,8 @@ from chips import Chips
 
 import os
 
+chips = Chips()
+
 class BlackJack:
 
     def __init__(self):
@@ -14,7 +16,6 @@ class BlackJack:
         self.player_action = Player()
         self.player = Hand()
         self.dealer = Hand()
-        self.chips = Chips()
 
         self.start()
 
@@ -64,8 +65,8 @@ class BlackJack:
         elif self.player.sum > 21:
             print("Player busts")
             print("You lose")
-            self.chips.lose_bet()
-            print(self.chips)
+            chips.lose_bet()
+            print(chips)
             self.player_action.check_play_again()
 
     def check21_dealer(self):
@@ -75,7 +76,7 @@ class BlackJack:
                 print("Push")
             else:
                 print("You lose")
-                self.chips.lose_bet()
+                chips.lose_bet()
         elif self.dealer.sum < 21:
             if self.dealer.sum <= self.player.sum:
                 self.dealer_gets_card()
@@ -83,12 +84,12 @@ class BlackJack:
                 self.check21_dealer()
             else:
                 print("You lose")
-                self.chips.lose_bet()
+                chips.lose_bet()
         elif self.dealer.sum > 21:
                 print("Dealer busts! You win!")
-                self.chips.win_bet()
+                chips.win_bet()
                 
-        print(self.chips)
+        print(chips)
         play_again = self.player_action.check_play_again()
 
         if play_again:
@@ -127,8 +128,8 @@ class BlackJack:
             print('Cards: X, ' + p_dealer + ': X')
 
     def main(self):
+        chips.get_bet()
         bj = BlackJack()
-        bj.start()
 
 if __name__ == '__main__':
     bj = BlackJack()

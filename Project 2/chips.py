@@ -2,7 +2,7 @@ class Chips:
 
     def __init__(self, initial=1000):
         self.total = initial
-        self.bet = self.get_bet()
+        self.get_bet()
 
     def __str__(self):
         p = "Chips balance: "
