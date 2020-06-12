@@ -104,9 +104,13 @@ class BlackJack:
         print("*** Player ***")
         print(self.player)
         print("*** Dealer ***")
-        print(self.dealer, show_first_card)
-
-
+        p_dealer = self.dealer.__str__()
+        if show_first_card is True:
+            print(p_dealer)
+        else: 
+            p_dealer = p_dealer.split(':')[1].split(',')[1]
+            print('Cards: X, ' + p_dealer + ': X')
+            
 if __name__ == '__main__':
     bj = BlackJack()
     bj.start()
