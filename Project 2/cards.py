@@ -45,7 +45,7 @@ class Hand():
     def __str__(self, show_first_card = True):
         if show_first_card == True:
             p     = "Cards: " + ', '.join(i.__str__() for i in self.hand)
-            p_sum = "  Sum: " + str(self.sum)
+            p_sum = "  Sum: " + str(self.result())
             return p + p_sum
         else:
             first_hand = self.hand[1:]
@@ -88,15 +88,12 @@ if __name__ == '__main__':
 
     c = Cards('7', 'Hearts')
     player.add_card(c)
-    player.result()
     print(player)
     
     c = Cards('10', 'Diamonds')
     player.add_card(c)
-    player.result()
     print(player)
 
     c = Cards('A', 'Spades')
     player.add_card(c)
-    player.result()
     print(player)
