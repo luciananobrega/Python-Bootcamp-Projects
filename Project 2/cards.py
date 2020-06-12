@@ -35,33 +35,40 @@ class Deck():
         return card
 
 
-class Hand(Cards):
+class Hand():
     def __init__(self):
-        Cards.__init__(self)
         self.hand = []
         self.sum = 0
 
-    def prt(self, show_first_card = True):
+    def __str__(self, show_first_card = True):
         if show_first_card == True:
-            p     = "Cards: " + ', '.join(self.hand)
-            self.result()
-            p_sum = "  Sum: " + str(self.sum)
-            print(p + p_sum)
+            p     = "Cards: " + ', '.join(i.__str__() for i in self.hand)
+            p_sum = "  Sum: " + str(self.result())
+            return p + p_sum
         else:
-            first_hand = self.hand[:]
-            first_hand[0] = '_'
-            print("Cards: " + ', '.join(first_hand))
+            first_hand = self.hand[1:]
+            return "Cards: _, " + ', '.join(i.__str__() for i in self.hand[1:])
             
     def result(self):
         """
         Calculates the value on hand
         """
         self.sum = 0
-        for el in self.hand:
-            self.sum += self.values[el]
+        for card in self.hand:
+            self.sum += values[card.ranks]
+        return self.sum
 
     def add_card(self, card):
         """
         Includes card to hand
         """
         self.hand.append(card)
+
+
+if __name__ == '__main__':
+    deck = Deck()
+    player = Hand()
+    c = Cards('7', 'Hearts')
+    player.add_card(c)
+    player.result()
+    print(player.sum)
