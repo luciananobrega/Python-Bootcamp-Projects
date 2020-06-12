@@ -12,6 +12,7 @@ class BlackJack:
         self.player_action = Player()
         self.player = Hand()
         self.dealer = Hand()
+        self.chips = Chips()
         self.start()
 
     def start(self):
@@ -60,6 +61,8 @@ class BlackJack:
         elif self.player.sum > 21:
             print("Player busts")
             print("You lose")
+            self.chips.lose_bet()
+            print(self.chips)
             self.player_action.check_play_again()
 
     def check21_dealer(self):
@@ -69,6 +72,7 @@ class BlackJack:
                 print("Push")
             else:
                 print("You lose")
+                self.chips.lose_bet()
         elif self.dealer.sum < 21:
             if self.dealer.sum <= self.player.sum:
                 self.dealer_gets_card()
@@ -76,9 +80,12 @@ class BlackJack:
                 self.check21_dealer()
             else:
                 print("You lose")
+                self.chips.lose_bet()
         elif self.dealer.sum > 21:
                 print("Dealer busts! You win!")
-        
+                self.chips.win_bet()
+                
+        print(self.chips)
         self.player_action.check_play_again()
 
     def play(self):
