@@ -2,8 +2,6 @@ from cards import Deck, Hand
 from player import Player
 from chips import Chips
 
-import os
-
 chips = Chips()
 
 class BlackJack:
@@ -90,12 +88,10 @@ class BlackJack:
                 chips.win_bet()
                 
         print(chips)
-        play_again = self.player_action.check_play_again()
 
+        play_again = self.player_action.check_play_again()
         if play_again:
             self.main()
-        else:
-            os.sys.exit()
 
     def play(self):
         """

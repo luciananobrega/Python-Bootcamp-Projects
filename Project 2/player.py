@@ -1,3 +1,5 @@
+import sys
+
 class Player:
     def next_action(self):
         """
@@ -19,7 +21,7 @@ class Player:
         if opt.lower() == 'y':
             return True
         elif opt.lower() == 'n':
-            return False
+            sys.exit()
         else:
             print("Option not recognized. Try again.")
             self.check_play_again()
